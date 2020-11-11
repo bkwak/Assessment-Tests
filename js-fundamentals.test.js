@@ -51,12 +51,9 @@ describe('lockDown', () => {
     test("it successfully handles multiple inputs", () => {
         fake.mockClear();
         mocked('pwd', 2,3,4);
-        mocked('wrong', 2,3,4);
-        mocked('hello', 3,4,5);
         mocked('pwd', "hi", "hello", "hola");
 
         expect(secureFunc('lolol', 1, 2, 3)).toBe(6);
-        expect(secureFunc('wrong', 1, 2, 3)).toBe(401);
 
         expect(fake.mock.calls).toEqual([[2,3,4], ["hi","hello","hola"]]);
         expect(fake).toHaveBeenCalledTimes(2);
@@ -64,7 +61,7 @@ describe('lockDown', () => {
 });
 
 describe('arrDimensions', () => {
-    test("it works and accounts for the outer array", () => {
+    test("it works", () => {
         expect(arrDimensions( [2, 5, 1] )).toEqual(1);
         expect(arrDimensions( [2, [5], 1] )).toEqual(2);  
         expect(arrDimensions( [2, [5], [3]])).toEqual(2);
@@ -75,7 +72,7 @@ describe('arrDimensions', () => {
         expect(arrDimensions( [2, [5, [4,[5]]], [3, [[[[[10]]]]]], 1] )).toEqual(7); 
     });
     
-    test("it handles empty arrays", () => {
+    test("it accounts for the outer array", () => {
         expect(arrDimensions( [] )).toEqual(1);
     });
 });
