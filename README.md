@@ -1,11 +1,11 @@
 # recruitment-assessment-comprehensive-A-tests
-tests for grad assessment
+Jest Tests for Grad Assessment
 
 
 Make sure to install jest by running "npm install jest -D" and then copy the test files into the assessment directory that you're grading.
 
 
-Run the tests with "jest" in the terminal (so easy a fellow could do it).
+Run the tests with "jest" in the terminal (so easy a fellow could do it). 
 
 
-As always, feel free to PR with more tests or anything else you can think of!
+You'll still have to look over the resident's solution code, but this helps check for certain edge cases and functionality. As always, feel free to PR with more tests or anything else you can think of!
