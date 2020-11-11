@@ -6,3 +6,6 @@ Make sure to install jest by running "npm install jest -D" and then copy the tes
 
 
 Run the tests with "jest" in the terminal (so easy a fellow could do it).
+
+
+As always, feel free to PR with more tests or anything else you can think of!
