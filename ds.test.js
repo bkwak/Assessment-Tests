@@ -108,3 +108,84 @@ describe("Contains Method", () => {
     
 });
 
+describe("Contains Method", () => {
+
+    test("it has a contains method", () => {
+        expect(emptyBST.contains).toBeDefined();
+        expect(emptyBST.contains).toBeInstanceOf(Function);
+    });
+
+    test("it searches for nodes in correct direction based on value of current node", () => {
+        expect(bst.contains(13)).toBe(true);
+        expect(bst.contains(25)).toBe(true);
+        expect(bst.contains(87)).toBe(true);
+        expect(bst.contains(75)).toBe(true);
+        expect(bst.contains(70)).toBe(true);
+
+    });
+
+    test("it accounts for when there is no tree", () => {
+        expect(emptyBST.contains(13)).not.toBeUndefined();
+        expect(emptyBST.contains(13)).toBe(false);
+        expect(emptyBST.contains(50)).not.toBeUndefined();
+        expect(emptyBST.contains(50)).toBe(true);
+    });
+
+    test("it accounts for when the value can't be found", () => {
+        expect(bst.contains(10)).not.toBeUndefined();
+        expect(bst.contains(10)).toBe(false);
+        expect(bst.contains(90)).not.toBeUndefined();
+        expect(bst.contains(90)).toBe(false);
+    });
+    
+});
+
+describe("Max Method", () => {
+
+    test("it has a max method", () => {
+        expect(emptyBST.max).toBeDefined();
+        expect(emptyBST.max).toBeInstanceOf(Function);
+    });
+
+    test("it returns the value found in the right-most node on the tree", () => {
+        const getRightMostNode = (root) => {
+            let node = root;
+            while(node.right) {
+                node = node.right 
+            }
+            return node;
+        }
+        expect(bst.max()).toEqual(expect.any(Number));
+        expect(bst.max()).toBe(getRightMostNode(bst).value);
+    });
+
+    test("it accounts for when there is no tree", () => {
+        expect(emptyBST.max()).toEqual(expect.any(Number));
+        expect(emptyBST.max()).toBe(emptyBST.value);
+    });
+});
+
+describe("Min Method", () => {
+
+    test("it has a min method", () => {
+        expect(emptyBST.min).toBeDefined();
+        expect(emptyBST.min).toBeInstanceOf(Function);
+    });
+
+    test("it returns the value found in the left-most node on the tree", () => {
+        const getLeftMostNode = (root) => {
+            let node = root;
+            while(node.left) {
+                node = node.left 
+            }
+            return node;
+        }
+        expect(bst.min()).toEqual(expect.any(Number));
+        expect(bst.min()).toBe(getLeftMostNode(bst).value);
+    });
+
+    test("it accounts for when there is no tree", () => {
+        expect(emptyBST.min()).toEqual(expect.any(Number));
+        expect(emptyBST.min()).toBe(emptyBST.value);
+    });
+});
