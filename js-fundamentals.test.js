@@ -60,6 +60,12 @@ describe('lockDown', () => {
         expect(fake).toHaveBeenCalledTimes(2);
         expect(fake).toHaveReturnedTimes(2);
     });
+
+    test("it accepts empty strings as passwords", () => {
+        const notSecureFunc = lockDown(sum, "");
+        expect(notSecureFunc("", 2,3,4)).toBe(9);
+        expect(notSecureFunc('password', 2,3,4)).toBe(401);
+    });
 });
 
 describe('arrDimensions', () => {
