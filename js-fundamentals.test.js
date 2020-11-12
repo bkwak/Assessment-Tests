@@ -31,7 +31,7 @@ describe('lockDown', () => {
     const sum = function(a, b,c) { return a + (b ?? 0) + (c ?? 0) }
     const secureFunc = lockDown(sum, 'lolol');
     
-    const fake = jest.fn();
+    const fake = jest.fn(() => true);
     const mocked = lockDown(fake, 'pwd');
 
     
@@ -46,6 +46,7 @@ describe('lockDown', () => {
 
         expect(fake.mock.calls).toEqual([[2], [3]]);
         expect(fake).toHaveBeenCalledTimes(2);
+        expect(fake).toHaveReturnedTimes(2);
     });
     
     test("it successfully handles multiple inputs", () => {
@@ -57,11 +58,12 @@ describe('lockDown', () => {
 
         expect(fake.mock.calls).toEqual([[2,3,4], ["hi","hello","hola"]]);
         expect(fake).toHaveBeenCalledTimes(2);
+        expect(fake).toHaveReturnedTimes(2);
     });
 });
 
 describe('arrDimensions', () => {
-    test("it works", () => {
+    test("it works and accounts for the outer array", () => {
         expect(arrDimensions( [2, 5, 1] )).toEqual(1);
         expect(arrDimensions( [2, [5], 1] )).toEqual(2);  
         expect(arrDimensions( [2, [5], [3]])).toEqual(2);
