@@ -72,3 +72,25 @@ describe("GET /fancy", () => {
     });
 });
     
+describe("GET /styles.css", () => {
+    test('it sets the status to 200', async () => {
+        const response = await request.get('/styles.css'); 
+        expect(response.status).toBe(200);
+    });
+
+    test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
+        const response = await request.get('/styles.css'); 
+        expect(response.headers['content-type']).toBe('text/css');
+        expect(response.headers['charset']).toBe('utf-8');
+    });
+
+    test('it serves the styles.css.html page', async (done) => {
+        const response = await request.get('/styles.css'); 
+        const file = response.text;
+        fs.readFile(path.join(__dirname,'../client/styles.css'), (err, contents) => {
+            if(err) console.error(err);
+            expect(file).toBe(contents.toString());
+            done();
+        });
+    });
+});
