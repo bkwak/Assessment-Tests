@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const app = require('../server.js');
 const supertest = require('supertest')
 const request = supertest(app);
