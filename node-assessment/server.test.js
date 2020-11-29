@@ -4,11 +4,6 @@ const request = supertest(app);
 
 
 describe("GET /this", () => {
-    // request.serialize['text/html'] = (obj) => {
-    //     return 'html generated from obj';
-    // }
-
-
     test('it sets the status to 200', async () => {
         const response = await request.get('/this'); 
         expect(response.status).toBe(200);
@@ -20,10 +15,15 @@ describe("GET /this", () => {
         expect(response.headers['charset']).toBe('utf-8');
     })
 
-    test('it serves the this.html page', async () => {
+    test('it serves the this.html page', async (done) => {
         const response = await request.get('/this'); 
-        console.log(response);
-    })
+        const file = response.text;
+        fs.readFile(path.join(__dirname,'../client/this.html'), (err, contents) => {
+            if(err) console.error(err);
+            expect(file).toBe(contents.toString());
+            done();
+        });
+    });
 
 });
     
