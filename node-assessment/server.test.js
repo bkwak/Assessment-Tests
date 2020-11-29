@@ -94,3 +94,26 @@ describe("GET /styles.css", () => {
         });
     });
 });
+
+describe("404 page", () => {
+    test('it sets the status to 404', async () => {
+        const response = await request.get('/sdkfjh128'); 
+        expect(response.status).toBe(404);
+    });
+
+    test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
+        const response = await request.get('/sdkfjh128'); 
+        expect(response.headers['content-type']).toBe('text/html');
+        expect(response.headers['charset']).toBe('utf-8');
+    });
+
+    test('it serves the styles.css.html page', async (done) => {
+        const response = await request.get('/sdkfjh128'); 
+        const file = response.text;
+        fs.readFile(path.join(__dirname,'../client/404.html'), (err, contents) => {
+            if(err) console.error(err);
+            expect(file).toBe(contents.toString());
+            done();
+        });
+    });
+});
