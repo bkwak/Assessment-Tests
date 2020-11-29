@@ -24,7 +24,29 @@ describe("GET /this", () => {
             done();
         });
     });
+});
 
+describe("GET /that", () => {
+    test('it sets the status to 200', async () => {
+        const response = await request.get('/that'); 
+        expect(response.status).toBe(200);
+    });
+
+    test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
+        const response = await request.get('/that'); 
+        expect(response.headers['content-type']).toBe('text/html');
+        expect(response.headers['charset']).toBe('utf-8');
+    });
+
+    test('it serves the that.html page', async (done) => {
+        const response = await request.get('/that'); 
+        const file = response.text;
+        fs.readFile(path.join(__dirname,'../client/that.html'), (err, contents) => {
+            if(err) console.error(err);
+            expect(file).toBe(contents.toString());
+            done();
+        });
+    });
 });
     
     
