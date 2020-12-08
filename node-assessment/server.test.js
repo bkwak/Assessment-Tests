@@ -13,8 +13,7 @@ describe("GET /this", () => {
 
     test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
         const response = await request.get('/this'); 
-        expect(response.headers['content-type']).toBe('text/html');
-        expect(response.headers['charset']).toBe('utf-8');
+        expect(response.headers['content-type'].toLowerCase()).toMatch('text/html; charset=utf-8');
     })
 
     test('it serves the this.html page', async (done) => {
@@ -36,8 +35,8 @@ describe("GET /that", () => {
 
     test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
         const response = await request.get('/that'); 
-        expect(response.headers['content-type']).toBe('text/html');
-        expect(response.headers['charset']).toBe('utf-8');
+        expect(response.headers['content-type'].toLowerCase()).toMatch('text/html; charset=utf-8');
+
     });
 
     test('it serves the that.html page', async (done) => {
@@ -59,8 +58,8 @@ describe("GET /fancy", () => {
 
     test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
         const response = await request.get('/fancy'); 
-        expect(response.headers['content-type']).toBe('text/html');
-        expect(response.headers['charset']).toBe('utf-8');
+        expect(response.headers['content-type'].toLowerCase()).toMatch('text/html; charset=utf-8');
+
     });
 
     test('it serves the fancy.html page', async (done) => {
@@ -80,13 +79,13 @@ describe("GET /styles.css", () => {
         expect(response.status).toBe(200);
     });
 
-    test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
+    test('it sets the header of `Content-Type` to `text/css; charset=UTF-8`', async () => {
         const response = await request.get('/styles.css'); 
-        expect(response.headers['content-type']).toBe('text/css');
-        expect(response.headers['charset']).toBe('utf-8');
+        expect(response.headers['content-type'].toLowerCase()).toMatch('text/css; charset=utf-8');
+
     });
 
-    test('it serves the styles.css.html page', async (done) => {
+    test('it serves the styles.css page', async (done) => {
         const response = await request.get('/styles.css'); 
         const file = response.text;
         fs.readFile(path.join(__dirname,'../client/styles.css'), (err, contents) => {
@@ -105,11 +104,11 @@ describe("404 page", () => {
 
     test('it sets the header of `Content-Type` to `text/html; charset=UTF-8`', async () => {
         const response = await request.get('/sdkfjh128'); 
-        expect(response.headers['content-type']).toBe('text/html');
-        expect(response.headers['charset']).toBe('utf-8');
+        expect(response.headers['content-type'].toLowerCase()).toMatch('text/html; charset=utf-8');
+
     });
 
-    test('it serves the styles.css.html page', async (done) => {
+    test('it serves the 404 html page', async (done) => {
         const response = await request.get('/sdkfjh128'); 
         const file = response.text;
         fs.readFile(path.join(__dirname,'../client/404.html'), (err, contents) => {
