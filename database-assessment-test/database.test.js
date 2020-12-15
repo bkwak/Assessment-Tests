@@ -36,15 +36,34 @@ afterAll(async () => {
 xdescribe('Schema', () => {});
 
 describe('POST/student', () => {
+    
+    const newStudent = {
+        firstName: 'Barack',
+        lastName: 'Obama',
+        age: 60
+    };
+    let result;
 
-    test('Must be a correctly set up POST route', () => {
-        expect(2).toBeTruthy();
+    test('it must be a correctly set up POST route', async (done) => {
+        const res = await request.post('/student').send(newStudent);
+        result = res.body;
+        expect(res.status).toBe(200);
+        done();
     })
 
-    xtest('Correctly create a new document in the database', () => {
-
+    test('it correctly creates a new document in the database', async (done) => {
+        const document = await Student.findOne({firstName: 'Barack',lastName: 'Obama',age: 60});
+        expect(document).toMatchObject(newStudent);
+        done();
     })
 
+    test('it must send newly created document back to client', () => {
+        expect(result).toMatchObject(newStudent);
+    })
 
-
+    test('Proper error handling: the response must have status code 418', async (done) => {
+        const res = await request.post('/student').send({nonsense: true});
+        expect(res.status).toBe(418);
+        done();
+    })
 });
