@@ -5,45 +5,44 @@ const supertest = require('supertest')
 const request = supertest(app);
 const Student = require('../StudentModel')
 
-const db = 
+
+const newStudent = {
+    firstName: 'Barack',
+    lastName: 'Obama',
+    age: 60
+};
+let result;
+
 
 beforeAll(async () => {
     const url = 'mongodb+srv://student:ilovetesting@database-assessment.ivrqc.mongodb.net/database-assessment?retryWrites=true&w=majority';
     await mongoose.connect(url, { useNewUrlParser: true });
 
-    //seed the database with test data
-    const students = [
-        {firstName: 'Ben', lastName: 'Kwak', age: 21 },
-        {firstName: 'Catherine', lastName: 'Chiu', age: 21 },
-        {firstName: 'Serena', lastName: 'Kuo', age: 21 },
-    ]
-    for (let i = 0; i < 3; i += 1) {
-        await Student.create(students[i]);
-    };
+    // //seed the database with test data
+    // const students = [
+    //     {firstName: 'Ben', lastName: 'Kwak', age: 21 },
+    //     {firstName: 'Catherine', lastName: 'Chiu', age: 21 },
+    //     {firstName: 'Serena', lastName: 'Kuo', age: 21 },
+    // ]
+    // for (let i = 0; i < 3; i += 1) {
+    //     await Student.create(students[i]);
+    // };
     
-    //verify data was seeded properly
-    const data = await Student.find({});
-    console.log(data);
+    // //verify data was seeded properly
+    // const data = await Student.find({});
+    // console.log(data);
 });
 
 afterAll(async () => {
     //delete all entries in database and close the connection
-    await Student.deleteMany({});
+    // await Student.deleteMany({});
     await mongoose.connection.close();
 });
 
 //currently no tests, so make sure to manually check
 xdescribe('Schema', () => {});
 
-describe('POST/student', () => {
-    
-    const newStudent = {
-        firstName: 'Barack',
-        lastName: 'Obama',
-        age: 60
-    };
-    let result;
-
+xdescribe('POST/student', () => {
     test('it must be a correctly set up POST route', async (done) => {
         const res = await request.post('/student').send(newStudent);
         result = res.body;
@@ -66,4 +65,13 @@ describe('POST/student', () => {
         expect(res.status).toBe(418);
         done();
     })
+});
+
+describe('GET /student/:name', () => {
+    test('it correctly retrieves document from the database', async (done) => {
+        const res = await request.get('/student/Barack');
+        expect(res.body).toHaveLength(1);
+        expect(res.body[0]).toMatchObject(newStudent);
+        done();
+    });
 });
