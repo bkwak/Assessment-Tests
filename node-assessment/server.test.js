@@ -1,8 +1,24 @@
+/**
+ * ************************************
+ * @module  node-assessment-test
+ * @author  Ben/ bkwak
+ * @date    12/14/20 
+ * @description For the tests to work you have to make the following changes to the students' files:
+ *     In server.js, 
+ *          - comment out or remove the following line:
+ *                 app.listen(3000);
+            - export the server instead
+ *                 module.exports = app;
+ * ************************************
+ */
+
 const fs = require('fs');
 const path = require('path');
-const app = require('../server.js');
 const supertest = require('supertest')
 const request = supertest(app);
+
+//you may have to adjust the file path
+const app = require('../server.js');
 
 
 describe("GET /this", () => {

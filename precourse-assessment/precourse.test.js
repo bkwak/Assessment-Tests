@@ -1,3 +1,15 @@
+/**
+ * ************************************
+ * @module  node-assessment-test
+ * @author  Ben/ bkwak
+ * @date    12/14/20 
+ * @description In all test files, pay attention to the file paths (as files get moved around).
+ *              Node modules may have to be deleted and then re-installed to properly function
+ * ************************************
+ */
+
+
+//you may have to adjust the file path
 const capitalizeVowels = require('../js/part-1.js');
 const reverseChunk = require("../js/part-2.js");
 const snakeToCamel = require('../js/part-3.js');

@@ -18,14 +18,14 @@
  *
  *   If your tests hang up (you get the Jest did not exit one second after the test run has completed error), 
  *   then there is some error in the students' code preventing a response from being returned
- *
  * ************************************
  */
-
 
 const mongoose = require("mongoose");
 const supertest = require('supertest')
 const request = supertest(app);
+
+//you may have to adjust the file paths
 const app = require('../main.js');
 const Student = require('../StudentModel')
 

@@ -1,3 +1,16 @@
+/**
+ * ************************************
+ * @module  cs-fundamentals-test
+ * @author  Ben/ bkwak
+ * @date    12/14/20 
+ * @description For the tests to work you have to make the following changes to the students' files:
+ *     In main.js, 
+ *          - modify the export statement at the end to read: 
+ *            module.exports = { HashTable, hashCode };
+ * ************************************
+ */
+
+//you may have to adjust the file paths
 const {HashTable, hashCode} = require('../src/main.js');
 const HashTableExt = require('../src/extension.js');
 
