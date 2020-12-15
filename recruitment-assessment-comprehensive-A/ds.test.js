@@ -1,3 +1,4 @@
+//you may have to modify the file paths
 const BST = require('../part-2/main.js');
 
 const emptyBST = new BST(50);

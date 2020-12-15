@@ -1,3 +1,4 @@
+//you may have to modify the file paths
 const { chunkItUp,
     lockDown,
     arrDimensions,
