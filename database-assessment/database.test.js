@@ -1,7 +1,32 @@
+/**
+ * ************************************
+ * @module  database-test
+ * @author  Ben/ bkwak
+ * @date    12/14/20 
+ * @description For the tests to work you have to make the following changes to the students' files:
+ *     In main.js,
+ *           - Remove (or comment out) the following lines:
+ *               mongoose.connect('mongodb://student:ilovetesting@ds157247.mlab.com:57247/week-4-assessment');
+ *               mongoose.connection.once('open', () => { console.log('Connected to Database');});
+ *               app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
+ *           - Add the following line at the end:
+ *               module.exports = app; 
+ *       In package.json, 
+ *           - Add the following line anywhere: "jest": {"testEnvironment": "node"}
+ *       In StudentModel.js, 
+ *           - Make sure that the return value of mongoose.model(....) is the export
+ *
+ *   If your tests hang up (you get the Jest did not exit one second after the test run has completed error), 
+ *   then there is some error in the students' code preventing a response from being returned
+ *
+ * ************************************
+ */
+
+
 const mongoose = require("mongoose");
-const app = require('../main.js');
 const supertest = require('supertest')
 const request = supertest(app);
+const app = require('../main.js');
 const Student = require('../StudentModel')
 
 
@@ -41,7 +66,6 @@ afterAll(async () => {
     await Student.deleteMany({});
     await mongoose.connection.close();
 });
-
 
 describe('POST/student', () => {
     let result;
