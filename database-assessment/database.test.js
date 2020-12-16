@@ -101,7 +101,7 @@ describe('POST/student', () => {
 describe('GET /student/:name', () => {
     test('it correctly retrieves document from the database', async (done) => {
         const res = await request.get('/student/Donald');
-        if (Array.isArray(res)) {
+        if (Array.isArray(res.body)) {
             expect(res.body).toHaveLength(1);
             expect(res.body[0]).toMatchObject(newStudent1);
         }
