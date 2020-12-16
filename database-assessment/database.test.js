@@ -15,6 +15,7 @@
  *           - Add the following line anywhere: "jest": {"testEnvironment": "node"}
  *       In StudentModel.js, 
  *           - Make sure that the return value of mongoose.model(....) is the export
+ *           - Adjust their schema values to be "firstName", "lastName", "age" if necessary
  *
  *   If your tests hang up (you get the Jest did not exit one second after the test run has completed error), 
  *   then there is some error in the students' code preventing a response from being returned
