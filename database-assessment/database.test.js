@@ -26,11 +26,11 @@
 
 const mongoose = require("mongoose");
 const supertest = require('supertest')
-const request = supertest(app);
 
 //you may have to adjust the file paths
 const app = require('../main.js');
 const Student = require('../StudentModel')
+const request = supertest(app);
 
 
 const newStudent = {
